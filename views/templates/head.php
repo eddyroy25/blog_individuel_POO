@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	include("../model/pdo.php");
 	error_reporting(E_ALL & ~E_NOTICE);
 ?>
 <!DOCTYPE html>
@@ -9,11 +8,11 @@
         <title>Projet mini blog acs</title>
         <meta name="description" content="Bootstrap" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" type="text/css" href="templates/bootstrap/css/bootstrap.min.css"/>
-		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="views/templates/bootstrap/css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="views/css/style.css"/>
 		<meta charset="utf-8" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="templates/bootstrap/js/bootstrap.min.js"></script>
+        <script src="views/templates/bootstrap/js/bootstrap.min.js"></script>
 	</head>
 	<body>
 		<h1><a href="http://eddyr.marmier.codeur.online/blog_individual/index.php">Le Blog d'Eddy</a></h1>
@@ -60,3 +59,9 @@
 				</nav>
 			</div>
 		</header>
+		<body>
+			<main>
+				<?php include($page); ?>
+			</main>
+		</body>
+	</html>

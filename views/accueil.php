@@ -1,6 +1,5 @@
 <?php 	
 header('Content-Type: text/html; charset=utf-8');
-include("head.php");
 ?>
 <main class="container">
 	<div class="display">
@@ -65,5 +64,5 @@ $(document).ready(function(e) {
 		
 		<button class="bouton">Cacher</button>
 	</div>
-	<img class="branch" src="../images/branch.png">
+	<img class="branch" src="images/branch.png">
 </main>
