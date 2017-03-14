@@ -13,24 +13,24 @@ header('Content-Type: text/html; charset=utf-8');
 											<h2>Créer un article</h2>	
 										<div class="col-xs-12 col-md-12 col-md-offset-3">
 											<div>
-												<input id="nom" name="nom" placeholder="Nom" value="<?php echo $_SESSION["nom"];?>"><br>
+												<input id="nom" name="authorname" placeholder="Nom" value="<?php echo $_SESSION["authorname"];?>"><br>
 												<span id="nomerr" class="error"><?php echo $_SESSION["errnom"];?></span>
 											</div>
 											<div>
-												<input id="prenom" name="prenom" placeholder="Prénom" value="<?php echo $_SESSION["prenom"];?>"><br>
+												<input id="prenom" name="authorfname" placeholder="Prénom" value="<?php echo $_SESSION["authorfname"];?>"><br>
 												<span id="prenomerr" class="error"><?php echo $_SESSION["errprenom"];?></span>
 											</div>
 											<div>
-												<input id="titre" name="titre" placeholder="Titre" value="<?php echo $_SESSION["titre"];?>"><br>
+												<input id="titre" name="title" placeholder="Titre" value="<?php echo $_SESSION["title"];?>"><br>
 												<span id="titreerr" class="error"><?php echo $_SESSION["errtitre"];?></span>
 											</div>
 
 											<div>
-												<input id="categorie" name="categorie" placeholder="Catégorie" value="<?php echo $_SESSION["categorie"];?>"><br>
+												<input id="categorie" name="category" placeholder="Catégorie" value="<?php echo $_SESSION["category"];?>"><br>
 												<span id="caterr" class="error"><?php echo $_SESSION["errcategorie"];?></span>
 											</div>
 											<div>
-												<textarea id="article" name="article" rows="5" placeholder="Votre article" value="<?php echo $_SESSION["article"];?>"></textarea><br>
+												<textarea id="article" name="content" rows="5" placeholder="Votre article" value="<?php echo $_SESSION["content"];?>"></textarea><br>
 												<span id="articleerr" class="error"><?php echo $_SESSION["errarticle"];?></span><br>
 											</div>
 										</div>
@@ -46,7 +46,7 @@ header('Content-Type: text/html; charset=utf-8');
 </main>
 
 					<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-					<script>
+					<!----<script>
 
 						    $(function(){
 
@@ -109,7 +109,7 @@ header('Content-Type: text/html; charset=utf-8');
 						            return false;
 						        });
 						    });
-						</script>
+						</script>---->
 						
 <?php
 session_unset();

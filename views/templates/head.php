@@ -26,32 +26,28 @@
 								<a class="link dropdown-toggle" data-toggle="dropdown" href="#">AUTEURS
 								<span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									  <?php 
-											 $category = $pdo->query("SELECT nom_auteur,prenom_auteur FROM auteurs GROUP BY nom_auteur");
-											 $rlt = $category->fetchAll();
-											 foreach ($rlt as $aut) {
-												print "<li><a href='accueil.php?auteur=".$aut["nom_auteur"]."'>".$aut["prenom_auteur"]. " ".$aut["nom_auteur"]."</a></li>";
-											 }
+										<?php $rlt = $article->AuthorMenu();
+											foreach ($rlt as $aut) {
 										?>
+											<li><a href='views/accueil.php?author=<?= $aut->nom_auteur?>'><?= $aut->prenom_auteur?> <?= $aut->nom_auteur?></a></li>
+										<?php }?>
 								</ul>
 							</li>
 							<li class="dropdown">
 								<a class="link dropdown-toggle" data-toggle="dropdown" href="#">CATEGORIES
 								<span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									  <?php 
-											 $category = $pdo->query("SELECT nom_cat FROM categories GROUP BY nom_cat");
-											 $rlt = $category->fetchAll();
-											 foreach ($rlt as $cat) {
-												print "<li><a href='accueil.php?categorie=".$cat["nom_cat"]."'>".$cat["nom_cat"]."</a></li>";
-											 }
+									  <?php $rlt = $article->CategoryMenu();
+											foreach ($rlt as $cat) {
 										?>
+											<li><a href='views/accueil.php?category=<?= $cat->nom_cat?>'><?= $cat->nom_cat?></a></li>
+										<?php }?>
 								</ul>
 							</li>
 							
 							
 							<li class="writearticle">
-								<a href="write.php">+ Ecrire un nouvel article</a>
+								<a href="views/write.php">+ Ecrire un nouvel article</a>
 							</li>
 							
 						

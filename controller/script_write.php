@@ -1,28 +1,32 @@
 <?php 
 session_start();
 header('Content-Type: text/html; charset=utf-8');
+require_once 'classes/class.php';
+require_once 'pdo.php';
 
-$nom = $prenom = $titre = $categorie = $article = "";
+$article = new Article();
+
+$nom = $prenom = $titre = $categorie = $contenu = "";
 $error = false;
 
-	if ( (isset($_POST["nom"])) && (strlen(trim($_POST["nom"])) > 0) ) {
-        $nom = stripslashes(strip_tags($_POST["nom"]));	
+	if ( (isset($_POST["authorname"])) && (strlen(trim($_POST["authorname"])) > 0) ) {
+        $nom = stripslashes(strip_tags($_POST["authorname"]));	
     }
 	else {
         $_SESSION["errnom"] = "Merci d'écrire votre nom <br />";
 		$error = true;
         $nom = "";
 	}	
-    if ( (isset($_POST["prenom"])) && (strlen(trim($_POST["prenom"])) > 0) ) {
-        $prenom = stripslashes(strip_tags($_POST["prenom"]));	
+    if ( (isset($_POST["authorfname"])) && (strlen(trim($_POST["authorfname"])) > 0) ) {
+        $prenom = stripslashes(strip_tags($_POST["authorfname"]));	
     }
 	else {
         $_SESSION["errprenom"] = "Merci d'écrire votre prénom <br />";
 		$error = true;
         $prenom = "";
     }
-    if ( (isset($_POST["titre"])) && (strlen(trim($_POST["titre"])) > 0) ) {
-        $titre = stripslashes(strip_tags($_POST["titre"]));	
+    if ( (isset($_POST["title"])) && (strlen(trim($_POST["title"])) > 0) ) {
+        $titre = stripslashes(strip_tags($_POST["title"]));	
     }
 	else {
         $_SESSION["errtitre"] = "Merci d'écrire un titre <br />";
@@ -30,8 +34,8 @@ $error = false;
         $titre = "";
     }
 
-    if ( (isset($_POST["categorie"])) && (strlen(trim($_POST["categorie"])) > 0) ) {
-        $categorie = stripslashes(strip_tags($_POST["categorie"]));	
+    if ( (isset($_POST["category"])) && (strlen(trim($_POST["category"])) > 0) ) {
+        $categorie = stripslashes(strip_tags($_POST["category"]));	
     } 
 	else {
         $_SESSION["errcategorie"] = "Merci d'écrire une catégorie <br />";
@@ -39,36 +43,20 @@ $error = false;
         $categorie = "";
     }
 
-    if ( (isset($_POST["article"])) && (strlen(trim($_POST["article"])) > 0) ) {
-        $article = stripslashes(strip_tags($_POST["article"]));	
+    if ( (isset($_POST["content"])) && (strlen(trim($_POST["content"])) > 0) ) {
+        $contenu = stripslashes(strip_tags($_POST["content"]));	
     } 
 	else {
         $_SESSION["errarticle"] = "Merci d'écrire votre article <br />";
 		$error = true;
-        $article = "";
+        $contenu = "";
     }
 	
 	if ($error == false) {
 	
-	include("../model/pdo.php");
-	$sqlart="INSERT INTO articles (titre, contenu, nom_auteur, prenom_auteur, nom_categorie) VALUES (:titre, :article, :nom, :prenom, :categorie)";
-	$sqlcat="INSERT INTO categories (nom_cat) VALUES (:categorie)";
-	$sqlaut="INSERT INTO auteurs (nom_auteur, prenom_auteur) VALUES (:nom, :prenom)";
-	
-	$prep= $pdo->prepare("$sqlart");
-	$prep2= $prep->execute(array(	'titre' => $titre, 
-									'article' => $article,
-									'nom' => $nom,
-									'prenom' => $prenom,
-									'categorie' => $categorie));
-	$prep3= $pdo->prepare("$sqlcat");
-	$prep4= $prep3->execute(array(	'categorie' => $categorie));
-	$prep5= $pdo->prepare("$sqlaut");
-	$prep6= $prep5->execute(array(	'nom' => $nom,
-									'prenom' => $prenom));
-	$pdo = null;
-	
+	$article->CreateArticle();
+	echo 'Hello';
 	}
 
-	 header('Location: ../views/write.php');
+	 //header('Location: ../views/write.php');
 	 ?>
