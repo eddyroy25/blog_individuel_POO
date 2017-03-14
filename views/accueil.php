@@ -9,11 +9,11 @@ $article = new Article();
 <?php
    if (isset($_GET['author'])) {
 	  
-	  $result = $article->DisplayByAuthor(); 
+	  $result = $article->DisplayByAuthor($authorname); 
 	  
    }
    else if (isset($_GET['category'])) {
-	   $result = $article->DisplayByCategory();
+	   $result = $article->DisplayByCategory($categoryn);
    }
    else if (isset($_GET['article'])) {
 	   $result = $article->DisplayByArticle();

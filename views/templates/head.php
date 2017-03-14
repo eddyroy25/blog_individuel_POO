@@ -15,7 +15,7 @@
         <script src="views/templates/bootstrap/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<h1><a href="http://eddyr.marmier.codeur.online/blog_individual/index.php">Le Blog d'Eddy</a></h1>
+		<h1><a href='<?= WEBROOT?>'>Le Blog d'Eddy</a></h1>
 		<header>
 			<div class="container">
 				<nav class="navbar">
@@ -29,7 +29,7 @@
 										<?php $rlt = $article->AuthorMenu();
 											foreach ($rlt as $aut) {
 										?>
-											<li><a href='views/accueil.php?author=<?= $aut->nom_auteur?>'><?= $aut->prenom_auteur?> <?= $aut->nom_auteur?></a></li>
+											<li><a href='<?= WEBROOT?><?php $page?>?author=<?= $aut->nom_auteur?>'><?= $aut->prenom_auteur?> <?= $aut->nom_auteur?></a></li>
 										<?php }?>
 								</ul>
 							</li>
@@ -40,14 +40,14 @@
 									  <?php $rlt = $article->CategoryMenu();
 											foreach ($rlt as $cat) {
 										?>
-											<li><a href='views/accueil.php?category=<?= $cat->nom_cat?>'><?= $cat->nom_cat?></a></li>
+											<li><a href='<?= WEBROOT?><?php $page?>?category=<?= $cat->nom_cat?>'><?= $cat->nom_cat?></a></li>
 										<?php }?>
 								</ul>
 							</li>
 							
 							
 							<li class="writearticle">
-								<a href="views/write.php">+ Ecrire un nouvel article</a>
+								<a href="<?= WEBROOT?>views/write.php">+ Ecrire un nouvel article</a>
 							</li>
 							
 						

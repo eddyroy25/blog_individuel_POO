@@ -12,5 +12,5 @@ define('WEBROOT', str_replace($page, '', $_SERVER['SCRIPT_NAME']));
     if (isset($_GET['page'])) {
         $page = "views/".$_GET['page'].".php";
     }
-
+	
 include("views/templates/head.php");
