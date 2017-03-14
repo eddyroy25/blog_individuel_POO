@@ -13,20 +13,57 @@ class Article {
 		$authorfname = $_POST['authorfname'];
 		$categoryname = $_POST['category'];
 		
-		$sqlart="INSERT INTO articles (titre, contenu, nom_auteur, prenom_auteur, nom_categorie) VALUES ('".$titre."', '".$contenu."', '".$authorname."', '".$authorfname."', '".$categoryname."')";
+		// $sqlart="INSERT INTO articles (titre, contenu, nom_auteur, prenom_auteur, nom_categorie) VALUES ('".$titre."', '".$contenu."', '".$authorname."', '".$authorfname."', '".$categoryname."')";
 		$sqlcat="INSERT INTO categories (nom_cat) VALUES ('".$categoryname."')";
 		$sqlaut="INSERT INTO auteurs (nom_auteur, prenom_auteur) VALUES ('".$authorname."', '".$authorfname."')";
-		$query = $pdo->query($sqlart);
+		$sqlselectcatid = "SELECT :id_cat FROM categories";
+		$sqlselectautid = "SELECT :id_auteur FROM auteurs";
+		$verifyauthor = "SELECT nom_auteur,prenom_auteur FROM auteurs";
+		$verifycategory = "SELECT nom_cat FROM categories";
+		// $sqlinsertcatid = "INSERT INTO articles (idcategorie) VALUES ('".$id_cat."')";
+		// $sqlinsertcatid = "INSERT INTO articles (idauteur) VALUES ('".$id_aut."')";
+		
+		// $query= $pdo->query($verifyauthor);
+		// $res = $query->fetchAll();
+		
+		// foreach ($res as $row) {
+			
+			// $row->nom_auteur;
+			// $row->prenom_auteur;
+		// }
+		
+		// $query= $pdo->query($verifycategory);
+		// $rlt = $query->fetchAll();
+		
+		// foreach ($rlt as $line) {
+			
+			// $line->nom_cat;
+		// }
+		
+		// if (!isset($row->nom_auteur) && !isset($row->prenom_auteur) && !isset($line->nom_cat)) {	
+		// $query = $pdo->query($sqlart);
 		$query = $pdo->query($sqlcat);
+		$checkid = $pdo->prepare($sqlselectcatid);
+        $id_cat = $pdo->lastInsertId();
+		var_dump($id_cat);
+		$exe = $checkid->execute( [":id_cat" => $id_cat]);
 		$query = $pdo->query($sqlaut);
-        
+		// $inscat = $pdo->query("INSERT INTO articles (idcategorie) VALUES ('".$id_cat."')");
+		$checkaut = $pdo->prepare($sqlselectautid);
+        $id_aut = $pdo->lastInsertId();
+		var_dump($id_aut);
+		$exec = $checkaut->execute( [":id_auteur" => $id_aut]);
+		// $insaut = $pdo->query("INSERT INTO articles (idauteur) VALUES ('".$id_aut."')");
+		$insintoart = $pdo->query("INSERT INTO articles (titre, contenu, nom_auteur, prenom_auteur, nom_categorie, idcategorie, idauteur) VALUES ('".$titre."', '".$contenu."', '".$authorname."', '".$authorfname."', '".$categoryname."', '".$id_cat."', '".$id_aut."')");
+
+		// }
 	}
 	
 	public function DisplayByCategory($categoryn) {
 		global $pdo;
 		
 		$categoryn = $_GET['category'];
-		$sqldispcat="SELECT * FROM articles WHERE nom_categorie='".$categoryn."' ORDER BY nom_categorie DESC";
+		$sqldispcat="SELECT * FROM articles WHERE nom_cat='".$categoryn."' ORDER BY nom_cat DESC";
 		$query = $pdo->query($sqldispcat);
         return $query->fetchAll();
 		
@@ -58,13 +95,13 @@ class Article {
 	
 	public function AuthorMenu() {
 		global $pdo;
-		$sqlmenuaut = "SELECT nom_auteur,prenom_auteur FROM auteurs GROUP BY nom_auteur";
+		$sqlmenuaut = "SELECT id_auteur,nom_auteur,prenom_auteur FROM auteurs GROUP BY nom_auteur";
 		$query = $pdo->query($sqlmenuaut);
 		return $query->fetchAll();
 	}
 	public function CategoryMenu() {
 		global $pdo;
-		$sqlmenucat = "SELECT nom_cat FROM categories GROUP BY nom_cat";
+		$sqlmenucat = "SELECT id_cat,nom_cat FROM categories GROUP BY nom_cat";
 		$query = $pdo->query($sqlmenucat);
 		return $query->fetchAll();
 	}

@@ -29,7 +29,7 @@
 										<?php $rlt = $article->AuthorMenu();
 											foreach ($rlt as $aut) {
 										?>
-											<li><a href='<?= WEBROOT?><?php $page?>?author=<?= $aut->nom_auteur?>'><?= $aut->prenom_auteur?> <?= $aut->nom_auteur?></a></li>
+											<li><a href='<?= WEBROOT?><?php $page?>?author=<?= $aut->id_auteur?>'><?= $aut->prenom_auteur?> <?= $aut->nom_auteur?></a></li>
 										<?php }?>
 								</ul>
 							</li>
@@ -40,7 +40,7 @@
 									  <?php $rlt = $article->CategoryMenu();
 											foreach ($rlt as $cat) {
 										?>
-											<li><a href='<?= WEBROOT?><?php $page?>?category=<?= $cat->nom_cat?>'><?= $cat->nom_cat?></a></li>
+											<li><a href='<?= WEBROOT?><?php $page?>?category=<?= $cat->id_cat?>'><?= $cat->nom_cat?></a></li>
 										<?php }?>
 								</ul>
 							</li>
