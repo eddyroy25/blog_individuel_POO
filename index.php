@@ -1,4 +1,6 @@
 <?php
+session_start();
+error_reporting(E_ALL & ~E_NOTICE);
 require_once 'controller/pdo.php';
 require_once 'controller/classes/class.php';
 
@@ -12,5 +14,5 @@ define('WEBROOT', str_replace($page, '', $_SERVER['SCRIPT_NAME']));
     if (isset($_GET['page'])) {
         $page = "views/".$_GET['page'].".php";
     }
-	
+
 include("views/templates/head.php");

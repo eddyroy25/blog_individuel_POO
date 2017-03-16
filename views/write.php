@@ -1,8 +1,7 @@
 <?php 	
 session_start();
 error_reporting(E_ALL & ~E_NOTICE);
-include("../model/pdo.php");
-include("head.php");
+
 header('Content-Type: text/html; charset=utf-8');
 ?>
 <main>				

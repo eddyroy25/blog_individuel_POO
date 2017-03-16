@@ -1,5 +1,5 @@
 <?php
-
+require_once '../controller/pdo.php';
 
 class Article {
 	
@@ -56,24 +56,20 @@ class Article {
 		// $insaut = $pdo->query("INSERT INTO articles (idauteur) VALUES ('".$id_aut."')");
 		$insintoart = $pdo->query("INSERT INTO articles (titre, contenu, nom_auteur, prenom_auteur, nom_categorie, idcategorie, idauteur) VALUES ('".$titre."', '".$contenu."', '".$authorname."', '".$authorfname."', '".$categoryname."', '".$id_cat."', '".$id_aut."')");
 
-		// }
 	}
 	
-	public function DisplayByCategory($categoryn) {
+	public function DisplayByCategory($category) {
 		global $pdo;
 		
-		$categoryn = $_GET['category'];
-		$sqldispcat="SELECT * FROM articles WHERE nom_cat='".$categoryn."' ORDER BY nom_cat DESC";
+		$sqldispcat="SELECT * FROM articles WHERE idcategorie='".$category."' ORDER BY idcategorie DESC";
 		$query = $pdo->query($sqldispcat);
         return $query->fetchAll();
 		
 	}
 	
-	public function DisplayByAuthor($authorname) {
+	public function DisplayByAuthor($author) {
 		global $pdo;
-		
-		$authorn = $_GET['author'];
-		$sqldispaut= "SELECT * FROM articles WHERE nom_auteur='".$authorn."' ORDER BY nom_auteur DESC";
+		$sqldispaut= "SELECT * FROM articles WHERE idauteur=".$author." ORDER BY idauteur DESC";
 		$query = $pdo->query($sqldispaut);
         return $query->fetchAll();
 	}
@@ -95,13 +91,13 @@ class Article {
 	
 	public function AuthorMenu() {
 		global $pdo;
-		$sqlmenuaut = "SELECT id_auteur,nom_auteur,prenom_auteur FROM auteurs GROUP BY nom_auteur";
+		$sqlmenuaut = "SELECT idauteur,nom_auteur,prenom_auteur FROM articles GROUP BY nom_auteur";
 		$query = $pdo->query($sqlmenuaut);
 		return $query->fetchAll();
 	}
 	public function CategoryMenu() {
 		global $pdo;
-		$sqlmenucat = "SELECT id_cat,nom_cat FROM categories GROUP BY nom_cat";
+		$sqlmenucat = "SELECT idcategorie, nom_categorie FROM articles GROUP BY nom_categorie";
 		$query = $pdo->query($sqlmenucat);
 		return $query->fetchAll();
 	}

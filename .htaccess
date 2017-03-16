@@ -1,3 +1,4 @@
 RewriteEngine on
-RewriteCond %{REQUEST_URI} editeur/(.*)$
-RewriteRule editeur/front-([0-9]+)-yeux-([0-9]+)-nez-([0-9]+)-bouche-([0-9]+)$  editeur.php?selected=$1&selected2=$2&selected3=$3&selected4=$4 [L]
+RewriteRule author/([0-9]+)$  index.php?author=$1 [L]
+RewriteRule category/([0-9]+)$  index.php?category=$1 [L]
+RewriteRule write$  index.php?page=write [L]
